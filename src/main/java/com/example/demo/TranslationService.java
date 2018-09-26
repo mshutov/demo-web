@@ -2,27 +2,32 @@ package com.example.demo;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author <a href="mailto:mshutov@wiley.com">Mikhail Shutov</a>
  */
 @Service
 public class TranslationService {
-    private final ConcurrentHashMap<String, String> translations = new ConcurrentHashMap<>();
+    private final TranslationRepository repository;
+
+    public TranslationService(TranslationRepository repository) {
+        this.repository = repository;
+    }
 
     public void addTranslation(String word, String meaning) {
-        translations.put(word, meaning);
+        repository.addTranslation(word, meaning);
     }
 
     public Optional<String> findByWord(String word) {
-        return Optional.ofNullable(translations.get(word));
+        return repository.findByWord(word);
     }
 
     public Map<String, String> findAll() {
-        return Collections.unmodifiableMap(translations);
+        Map<String, String> result = new HashMap<>();
+        repository.findAll().forEach(pair -> result.put(pair.getWord(), pair.getMeaning()));
+        return result;
     }
 }
