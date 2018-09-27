@@ -14,10 +14,10 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping(path = "/translations")
-public class TranslationsController {
+public class TranslationController {
     private final TranslationService translationService;
 
-    public TranslationsController(TranslationService translationService) {
+    public TranslationController(TranslationService translationService) {
         this.translationService = translationService;
     }
 
