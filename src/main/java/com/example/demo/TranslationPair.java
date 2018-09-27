@@ -1,8 +1,5 @@
 package com.example.demo;
 
-/**
- * @author <a href="mailto:mshutov@wiley.com">Mikhail Shutov</a>
- */
 public class TranslationPair {
     private final String word;
     private final String meaning;

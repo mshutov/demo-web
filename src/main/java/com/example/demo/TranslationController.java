@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-/**
- * @author <a href="mailto:mshutov@wiley.com">Mikhail Shutov</a>
- */
 @RestController
 @RequestMapping(path = "/translations")
 public class TranslationController {

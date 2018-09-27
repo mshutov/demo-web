@@ -6,9 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * @author <a href="mailto:mshutov@wiley.com">Mikhail Shutov</a>
- */
 @Repository
 public class TranslationRepository {
     private final JdbcTemplate jdbcTemplate;

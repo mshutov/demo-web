@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * @author <a href="mailto:mshutov@wiley.com">Mikhail Shutov</a>
- */
 @Service
 public class TranslationService {
     private final TranslationRepository repository;
