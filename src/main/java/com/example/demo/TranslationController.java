@@ -34,7 +34,7 @@ public class TranslationController {
     }
 
     @GetMapping(path = "/random")
-    public TranslationPair getRandomTranslations(@PathVariable String word) {
+    public TranslationPair getRandomTranslations() {
         return translationService.random().orElse(new TranslationPair("[random]", "[No translation]"));
     }
 }
