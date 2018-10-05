@@ -32,4 +32,9 @@ public class TranslationController {
     public String getTranslations(@PathVariable String word) {
         return translationService.findByWord(word).orElse("[No translation]");
     }
+
+    @GetMapping(path = "/random")
+    public TranslationPair getRandomTranslations(@PathVariable String word) {
+        return translationService.random().orElse(new TranslationPair("[random]", "[No translation]"));
+    }
 }

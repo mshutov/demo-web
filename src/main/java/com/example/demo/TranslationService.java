@@ -27,4 +27,8 @@ public class TranslationService {
         repository.findAll().forEach(pair -> result.put(pair.getWord(), pair.getMeaning()));
         return result;
     }
+
+    public Optional<TranslationPair> random() {
+        return repository.random();
+    }
 }
