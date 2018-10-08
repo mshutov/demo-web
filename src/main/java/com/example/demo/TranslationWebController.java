@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TranslationWebController {
 
     @GetMapping
-    String home() {
+    public String home() {
         return "index";
     }
 }
