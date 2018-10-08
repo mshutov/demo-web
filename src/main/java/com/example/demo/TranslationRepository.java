@@ -35,8 +35,8 @@ public class TranslationRepository {
     }
 
     public Optional<TranslationPair> random() {
-        int translationCount = jdbcTemplate.queryForObject("select count(*) from translations", Integer.class);
-        int translationId = random.nextInt(translationCount);
+        List<Integer> ids = jdbcTemplate.queryForList("select id from translations", Integer.class);
+        int translationId = random.nextInt(ids.size());
         return jdbcTemplate.query("select word, meaning from translations where id=?", translationPairRowMapper(), translationId)
                 .stream().findFirst();
     }
