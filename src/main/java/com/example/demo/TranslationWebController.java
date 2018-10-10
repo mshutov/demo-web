@@ -3,7 +3,9 @@ package com.example.demo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Mikhail Shutov
@@ -28,6 +30,19 @@ public class TranslationWebController {
             model.addAttribute("word", tp.getWord());
             model.addAttribute("meaning", tp.getMeaning());
         });
+        return "card";
+    }
+
+    @PostMapping(path = "new")
+    public String createForm() {
+        return "form";
+    }
+
+    @PostMapping(path = "create")
+    public String create(@RequestParam String word, @RequestParam String meaning, Model model) {
+        translationService.addTranslation(word, meaning);
+        model.addAttribute("word", word);
+        model.addAttribute("meaning", meaning);
         return "card";
     }
 }
