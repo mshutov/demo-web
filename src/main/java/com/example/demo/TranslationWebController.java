@@ -33,7 +33,7 @@ public class TranslationWebController {
         return "card";
     }
 
-    @PostMapping(path = "new")
+    @GetMapping(path = "new")
     public String createForm() {
         return "form";
     }
