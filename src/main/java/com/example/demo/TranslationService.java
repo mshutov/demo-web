@@ -2,11 +2,11 @@ package com.example.demo;
 
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+
+import lombok.val;
 
 @Service
 public class TranslationService {
@@ -17,22 +17,20 @@ public class TranslationService {
         this.repository = repository;
     }
 
-    public void addTranslation(String word, String meaning) {
+    void addTranslation(String word, String meaning) {
         repository.addTranslation(word, meaning);
     }
 
-    public Optional<String> findByWord(String word) {
+    Optional<String> findByWord(String word) {
         return repository.findByWord(word);
     }
 
-    public Map<String, String> findAll() {
-        Map<String, String> result = new HashMap<>();
-        repository.findAll().forEach(pair -> result.put(pair.getWord(), pair.getMeaning()));
-        return result;
+    List<TranslationPair> findAll() {
+        return repository.findAll();
     }
 
-    public Optional<TranslationPair> random() {
-        List<Integer> ids = repository.findIds();
+    Optional<TranslationPair> random() {
+        val ids = repository.findIds();
         return ids.isEmpty() ? Optional.empty() : repository.getById(chooseRandomIdFromList(ids));
     }
 

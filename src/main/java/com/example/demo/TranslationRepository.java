@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class TranslationRepository {
+class TranslationRepository {
     private final JdbcTemplate jdbcTemplate;
 
     TranslationRepository(JdbcTemplate jdbcTemplate) {

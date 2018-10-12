@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/translations")
@@ -24,7 +24,7 @@ public class TranslationController {
     }
 
     @GetMapping
-    public Map<String, String> getTranslations() {
+    public List<TranslationPair> getTranslations() {
         return translationService.findAll();
     }
 

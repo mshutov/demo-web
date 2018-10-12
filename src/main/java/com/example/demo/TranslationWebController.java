@@ -35,7 +35,14 @@ public class TranslationWebController {
     }
 
     @GetMapping(path = "new")
-    public String createForm() {
+    public String createForm(@RequestParam(required = false) String word,
+                             @RequestParam(required = false) String meaning,
+                             Model model) {
+        if (word != null && meaning != null) {
+            translationService.addTranslation(word, meaning);
+            model.addAttribute("word", word);
+            model.addAttribute("meaning", meaning);
+        }
         return "form";
     }
 
