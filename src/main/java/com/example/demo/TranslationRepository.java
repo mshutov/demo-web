@@ -19,8 +19,8 @@ class TranslationRepository {
         jdbcTemplate.update("insert into translations (word, meaning) values (?,?)", word, meaning);
     }
 
-    Optional<String> findByWord(String word) {
-        return jdbcTemplate.queryForList("select meaning from translations where word=?", String.class, word)
+    Optional<TranslationPair> findByWord(String word) {
+        return jdbcTemplate.query("select word, meaning from translations where word=?", translationPairRowMapper(), word)
                 .stream().findFirst();
     }
 

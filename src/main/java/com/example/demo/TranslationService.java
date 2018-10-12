@@ -21,7 +21,7 @@ public class TranslationService {
         repository.addTranslation(word, meaning);
     }
 
-    Optional<String> findByWord(String word) {
+    Optional<TranslationPair> findByWord(String word) {
         return repository.findByWord(word);
     }
 

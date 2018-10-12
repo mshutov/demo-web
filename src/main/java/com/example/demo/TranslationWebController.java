@@ -31,6 +31,15 @@ public class TranslationWebController {
         return "card";
     }
 
+    @GetMapping(path = "word/{word}")
+    public String meaning(@RequestParam String word, Model model) {
+        translationService.findByWord(word).ifPresent(tp -> {
+            model.addAttribute("word", tp.getWord());
+            model.addAttribute("meaning", tp.getMeaning());
+        });
+        return "card";
+    }
+
     @RequestMapping(path = "new", method = {RequestMethod.GET, RequestMethod.POST})
     public String createForm(@RequestParam(required = false) String word,
                              @RequestParam(required = false) String meaning,
@@ -41,13 +50,5 @@ public class TranslationWebController {
             model.addAttribute("meaning", meaning);
         }
         return "form";
-    }
-
-    @PostMapping(path = "create")
-    public String create(@RequestParam String word, @RequestParam String meaning, Model model) {
-        translationService.addTranslation(word, meaning);
-        model.addAttribute("word", word);
-        model.addAttribute("meaning", meaning);
-        return "card";
     }
 }

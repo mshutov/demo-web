@@ -3,5 +3,8 @@
     <h1>{{word}}</h1>
     <div>{{meaning}}</div>
     <div><a href="/">Home</a></div>
+    {{#link}}
+        <div><a href="/word/{{word}}">{{word}}</a></div>
+    {{/link}}
 </body>
 </html>

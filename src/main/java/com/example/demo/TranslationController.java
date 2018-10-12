@@ -29,8 +29,8 @@ public class TranslationController {
     }
 
     @GetMapping(path = "/{word}")
-    public String getTranslations(@PathVariable String word) {
-        return translationService.findByWord(word).orElse("[No translation]");
+    public TranslationPair getTranslations(@PathVariable String word) {
+        return translationService.findByWord(word).orElse(new TranslationPair(word,"[No translation]"));
     }
 
     @GetMapping(path = "/random")
