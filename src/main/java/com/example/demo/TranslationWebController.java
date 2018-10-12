@@ -2,10 +2,7 @@ package com.example.demo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Mikhail Shutov
@@ -34,7 +31,7 @@ public class TranslationWebController {
         return "card";
     }
 
-    @GetMapping(path = "new")
+    @RequestMapping(path = "new", method = {RequestMethod.GET, RequestMethod.POST})
     public String createForm(@RequestParam(required = false) String word,
                              @RequestParam(required = false) String meaning,
                              Model model) {
