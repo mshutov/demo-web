@@ -32,7 +32,7 @@ public class TranslationWebController {
     }
 
     @GetMapping(path = "word/{word}")
-    public String meaning(@RequestParam String word, Model model) {
+    public String meaning(@PathVariable String word, Model model) {
         translationService.findByWord(word).ifPresent(tp -> {
             model.addAttribute("word", tp.getWord());
             model.addAttribute("meaning", tp.getMeaning());
