@@ -3,6 +3,7 @@ package com.example.demo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * @author Mikhail Shutov
@@ -22,13 +23,21 @@ public class TranslationWebController {
         return "index";
     }
 
-    @GetMapping(path = "random")
-    public String random(Model model) {
+    @GetMapping(path = "rnd")
+    public String randomOld(Model model) {
         translationService.random().ifPresent(tp -> {
             model.addAttribute("word", tp.getWord());
             model.addAttribute("meaning", tp.getMeaning());
         });
         return "card";
+    }
+
+    @GetMapping(path = "random")
+    public RedirectView random() {
+        return new RedirectView(
+                translationService.random()
+                        .map(TranslationPair::getWord).map(w -> "/word/" + w)
+                        .orElse("/rnd"));
     }
 
     @GetMapping(path = "word/{word}")
