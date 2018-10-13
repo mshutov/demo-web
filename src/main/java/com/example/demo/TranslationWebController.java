@@ -23,21 +23,13 @@ public class TranslationWebController {
         return "index";
     }
 
-    @GetMapping(path = "rnd")
-    public String randomOld(Model model) {
-        translationService.random().ifPresent(tp -> {
-            model.addAttribute("word", tp.getWord());
-            model.addAttribute("meaning", tp.getMeaning());
-        });
-        return "card";
-    }
-
     @GetMapping(path = "random")
     public RedirectView random() {
         return new RedirectView(
                 translationService.random()
-                        .map(TranslationPair::getWord).map(w -> "/word/" + w)
-                        .orElse("/rnd"));
+                        .map(TranslationPair::getWord)
+                        .map(w -> "/word/" + w)
+                        .orElse("/"));
     }
 
     @GetMapping(path = "word/{word}")
