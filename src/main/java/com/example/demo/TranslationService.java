@@ -34,7 +34,7 @@ public class TranslationService {
         return records.isEmpty() ? Optional.empty() : Optional.of(chooseRandomFromList(records));
     }
 
-    private TranslationPair chooseRandomFromList(List<TranslationPair> ids) {
-        return ids.get(random.nextInt(ids.size()));
+    private TranslationPair chooseRandomFromList(List<TranslationPair> elements) {
+        return elements.get(random.nextInt(elements.size()));
     }
 }
