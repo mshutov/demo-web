@@ -30,11 +30,11 @@ public class TranslationService {
     }
 
     Optional<TranslationPair> random() {
-        val ids = repository.findIds();
-        return ids.isEmpty() ? Optional.empty() : repository.getById(chooseRandomIdFromList(ids));
+        val records = repository.findAll();
+        return records.isEmpty() ? Optional.empty() : Optional.of(chooseRandomFromList(records));
     }
 
-    private Integer chooseRandomIdFromList(List<Integer> ids) {
+    private TranslationPair chooseRandomFromList(List<TranslationPair> ids) {
         return ids.get(random.nextInt(ids.size()));
     }
 }

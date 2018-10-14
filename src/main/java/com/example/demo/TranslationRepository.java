@@ -31,14 +31,4 @@ class TranslationRepository {
     private RowMapper<TranslationPair> translationPairRowMapper() {
         return (rs, rowNum) -> new TranslationPair(rs.getString(1), rs.getString(2));
     }
-
-    Optional<TranslationPair> getById(int translationId) {
-        return jdbcTemplate
-                .query("select word, meaning from translations where id=?", translationPairRowMapper(), translationId)
-                .stream().findFirst();
-    }
-
-    List<Integer> findIds() {
-        return jdbcTemplate.queryForList("select id from translations", Integer.class);
-    }
 }
