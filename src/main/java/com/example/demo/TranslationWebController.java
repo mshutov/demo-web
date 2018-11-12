@@ -1,15 +1,15 @@
 package com.example.demo;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import lombok.val;
+
 /**
  * @author Mikhail Shutov
  */
-@Slf4j
 @Controller
 @RequestMapping(path = "/")
 public class TranslationWebController {
@@ -36,12 +36,13 @@ public class TranslationWebController {
 
     @GetMapping(path = "word/{word}")
     public String meaning(@PathVariable String word, Model model) {
-        translationService.findByWord(word).ifPresent(tp -> {
-            model.addAttribute("word", tp.getWord());
-            model.addAttribute("meaning", tp.getMeaning());
-            model.addAttribute("translatedByYandex", tp.isTranslatedByYandex());
-            log.info("Model: {}", model);
-        });
+        val tp = translationService.findByWord(word)
+                .orElseGet(() -> new TranslationPair(word, "[No translation available]"));
+
+        model.addAttribute("word", tp.getWord());
+        model.addAttribute("meaning", tp.getMeaning());
+        model.addAttribute("translatedByYandex", tp.isTranslatedByYandex());
+
         return "card";
     }
 
