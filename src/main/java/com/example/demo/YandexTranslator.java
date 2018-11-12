@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,7 +14,6 @@ import lombok.val;
  * @author Mikhail Shutov
  */
 @Service
-@Slf4j
 public class YandexTranslator {
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -26,13 +24,12 @@ public class YandexTranslator {
 
     private final String apiKey;
 
-    public YandexTranslator(@Value("${api.yandex.key") String apiKey) {
+    public YandexTranslator(@Value("${api.yandex.key}") String apiKey) {
         this.apiKey = apiKey;
     }
 
     public Optional<String> findByWord(String word) {
         val url = UriComponentsBuilder.fromHttpUrl(API_URL).build(apiKey, word);
-        log.info("Url to query for translation: {}", url);
         return Optional.ofNullable(restTemplate.getForObject(url, YandexTranslation.class))
                 .flatMap(YandexTranslation::getFirstTranslation);
     }
