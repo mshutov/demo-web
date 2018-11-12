@@ -13,10 +13,10 @@ import java.util.Optional;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class YandexTranslation {
-    private List<String> translations;
+    private List<String> text;
 
     @JsonIgnore
     public Optional<String> getFirstTranslation() {
-        return translations != null && !translations.isEmpty() ? Optional.of(translations.get(0)) : Optional.empty();
+        return text != null && !text.isEmpty() ? Optional.of(text.get(0)) : Optional.empty();
     }
 }
