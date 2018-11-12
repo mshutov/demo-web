@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import org.springframework.web.servlet.view.RedirectView;
 /**
  * @author Mikhail Shutov
  */
+@Slf4j
 @Controller
 @RequestMapping(path = "/")
 public class TranslationWebController {
@@ -38,6 +40,7 @@ public class TranslationWebController {
             model.addAttribute("word", tp.getWord());
             model.addAttribute("meaning", tp.getMeaning());
             model.addAttribute("translatedByYandex", tp.isTranslatedByYandex());
+            log.info("Model: {}", model);
         });
         return "card";
     }
