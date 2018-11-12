@@ -37,6 +37,7 @@ public class TranslationWebController {
         translationService.findByWord(word).ifPresent(tp -> {
             model.addAttribute("word", tp.getWord());
             model.addAttribute("meaning", tp.getMeaning());
+            model.addAttribute("translatedByYandex", tp.isTranslatedByYandex());
         });
         return "card";
     }

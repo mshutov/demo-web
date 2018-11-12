@@ -8,4 +8,9 @@ import lombok.Data;
 class TranslationPair {
     private final String word;
     private final String meaning;
+    private boolean translatedByYandex;
+
+    public TranslationPair(String word, String meaning) {
+        this(word, meaning, false);
+    }
 }

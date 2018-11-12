@@ -11,10 +11,13 @@ import lombok.val;
 @Service
 public class TranslationService {
     private final TranslationRepository repository;
+    private final YandexTranslator yandexTranslator;
+
     private final Random random = new Random();
 
-    public TranslationService(TranslationRepository repository) {
+    public TranslationService(TranslationRepository repository, YandexTranslator yandexTranslator) {
         this.repository = repository;
+        this.yandexTranslator = yandexTranslator;
     }
 
     void addTranslation(String word, String meaning) {
@@ -22,7 +25,9 @@ public class TranslationService {
     }
 
     Optional<TranslationPair> findByWord(String word) {
-        return repository.findByWord(word);
+        val localResult = repository.findByWord(word);
+        return localResult.isPresent() ? localResult : yandexTranslator.findByWord(word)
+                .map(meaning -> new TranslationPair(word, meaning, true));
     }
 
     List<TranslationPair> findAll() {
